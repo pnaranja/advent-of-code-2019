@@ -11,14 +11,12 @@ pub fn print_fuel() -> std::io::Result<()> {
     let mut total: f64 = 0.0;
 
     for line in br.lines() {
-      let line = line?;
-      let n: f64 = line.parse().unwrap();
-      let m: f64 = (n / 3.0).floor() - 2.0; 
-      total = total + m;
+        let line = line?;
+        let n: f64 = line.parse().unwrap();
+        let m: f64 = (n / 3.0).floor() - 2.0;
+        total = total + m;
     }
 
     println!("Total Fuel: {}", total);
-
     Ok(())
 }
-
