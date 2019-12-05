@@ -6,7 +6,7 @@ use std::io::{BufRead, BufReader};
 pub fn print_fuel() -> std::io::Result<()> {
     println!("Day 1");
 
-    let file = File::open("input.txt")?;
+    let file = File::open("input/day1_input.txt").expect("Could not open input for day1");
     let br = BufReader::new(file);
     let mut total: f64 = 0.0;
 
