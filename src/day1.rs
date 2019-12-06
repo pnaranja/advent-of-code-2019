@@ -35,10 +35,12 @@ fn calc_fuel(mass: f32) -> f32 {
     }
 }
 
-pub fn print_fuel2() -> f32 {
-    get_lines("input/day1_input_paul.txt")
+pub fn print_fuel2() {
+    let new_fuel_sum : f32 = get_lines("input/day1_input_paul.txt")
         .lines()
         .map(|l| l.unwrap().parse::<f32>().unwrap())
         .map(|m| calc_fuel(m))
-        .sum()
+        .sum();
+
+    println!("New Total Fuel: {}", new_fuel_sum);
 }
