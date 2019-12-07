@@ -1,7 +1,6 @@
 // Advent of Code 2019
 // Day 2
-pub fn print_intcode(x: usize, y: usize) -> std::io::Result<()> {
-    println!("Day 2");
+pub fn print_intcode(x: usize, y: usize) -> usize {
 
     let code = [
         1, 0, 0, 3, 1, 1, 2, 3, 1, 3, 4, 3, 1, 5, 0, 3, 2, 13, 1, 19, 1, 19, 10, 23, 2, 10, 23, 27,
@@ -14,6 +13,7 @@ pub fn print_intcode(x: usize, y: usize) -> std::io::Result<()> {
 
     let mut counter: usize = 0;
     let mut mutated = code;
+    let mut answer = 0;
 
     mutated[1] = x;
     mutated[2] = y;
@@ -37,12 +37,29 @@ pub fn print_intcode(x: usize, y: usize) -> std::io::Result<()> {
                 mutated[index] = product;
             }
             99 => {
-                println!("Left most intcode: {}", mutated[0]);
+                answer = mutated[0];
                 break;
             }
             _ => println!("Something went wrong."),
         }
         counter = counter + 4;
-    }
-    Ok(())
+    } 
+    return answer;
+}
+
+pub fn find(z: usize) -> (usize, usize) {
+  let mut x = 0;
+  let mut y = 0;
+  for i in 0..100 {
+      x = i;
+      for j in 0..100 {
+          y = j;
+          let test = print_intcode(x, y);
+          if test == z {
+              println!("z is {}, x is {}, y is {} and f(x,y) is {}", z, x, y, test);
+              return (x, y); 
+          }
+      }      
+  }
+  return (x, y); 
 }
