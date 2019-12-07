@@ -1,5 +1,6 @@
 mod day1;
 mod day2;
+mod day2_paul;
 
 fn main() -> Result<(), std::io::Error> {
     println!("Hello, Advent of Code 2019!");
@@ -11,5 +12,9 @@ fn main() -> Result<(), std::io::Error> {
     println!("Leftmost intcode: {}", day2::print_intcode(12, 2));
     let tup = day2::find(19690720);
     println!("{:?} and (100 * noun + verb) = {}", tup, 100 * tup.0 + tup.1);
+
+    println!("Day 2 - Paul");
+    day2_paul::print_intcode();
+
     Ok(())
 }
