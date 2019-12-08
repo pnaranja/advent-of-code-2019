@@ -1,5 +1,5 @@
 //! Advent of Code - Day 2
-//! Given an array/vector of numbers (num[]), analyze every 4 numbers 
+//! Given an array/vector of numbers (num[]), analyze every 4 numbers
 //! Every 4 numbers (n1, n2, n3, n4) represent a command
 //! If n1 == 1, then num[n4] = num[n2] + num[n3]
 //! If n1 == 2, then num[n4] = num[n2] * num[n3]
@@ -8,24 +8,47 @@
 use std::fs::File;
 use std::io::{BufReader, Read};
 
-pub fn print_intcode() {
-    let num_vec = get_lines("input/day2_modified_input_paul.txt");
-    let mut new_num_vec = num_vec.to_vec();
-    num_vec.chunks_exact(4).for_each(|chunk| process_four_nums(chunk, &mut new_num_vec));
-    
-    println!("Paul Day2 intcode: {:?}", new_num_vec[0]);
+/// Find the highest value < desired_intcode by increasing just the noun value
+/// Then increase the verb value until the value == desired_intcode
+/// Return the noun and verb values
+pub fn find_noun_verb(desired_intcode: i32) -> (i32, i32) {
+    let (noun, _num): (i32, i32) = (1..100)
+        .map(|n| (n, process_intcode(n, 0)))
+        .filter(|&(s, y)| y <= desired_intcode)
+        .last()
+        .unwrap();
+
+    let verb = (1..100)
+        .filter(|&v| process_intcode(noun, v) == desired_intcode)
+        .nth(0)
+        .unwrap();
+
+    (noun, verb)
 }
 
-fn process_four_nums(four_nums: &[i32], num_vec : &mut Vec<i32>){
+pub fn process_intcode(noun: i32, verb: i32) -> i32 {
+    let mut num_vec = get_lines("input/day2_modified_input_paul.txt");
+    num_vec[1] = noun;
+    num_vec[2] = verb;
+
+    let mut new_num_vec = num_vec.to_vec();
+    num_vec
+        .chunks_exact(4)
+        .for_each(|chunk| process_four_nums(chunk, &mut new_num_vec));
+
+    new_num_vec[0]
+}
+
+fn process_four_nums(four_nums: &[i32], num_vec: &mut Vec<i32>) {
     let opcode = four_nums[0].clone();
     let num1 = four_nums[1].clone() as usize;
     let num2 = four_nums[2].clone() as usize;
     let dest = four_nums[3].clone() as usize;
-    match opcode{
-	1 => num_vec[dest] = num_vec[num1] + num_vec[num2],
-	2 => num_vec[dest] = num_vec[num1] * num_vec[num2],
-	99 => println!("Finished processing numbers"),
-	_ => println!("ERROR processing numbers"),
+    match opcode {
+        1 => num_vec[dest] = num_vec[num1] + num_vec[num2],
+        2 => num_vec[dest] = num_vec[num1] * num_vec[num2],
+        99 => num_vec[dest] = num_vec[dest],
+        _ => println!("ERROR processing numbers"),
     }
 }
 
