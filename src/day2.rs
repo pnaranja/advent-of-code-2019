@@ -1,7 +1,6 @@
 // Advent of Code 2019
 // Day 2
 pub fn print_intcode(x: usize, y: usize) -> usize {
-
     let code = [
         1, 0, 0, 3, 1, 1, 2, 3, 1, 3, 4, 3, 1, 5, 0, 3, 2, 13, 1, 19, 1, 19, 10, 23, 2, 10, 23, 27,
         1, 27, 6, 31, 1, 13, 31, 35, 1, 13, 35, 39, 1, 39, 10, 43, 2, 43, 13, 47, 1, 47, 9, 51, 2,
@@ -43,23 +42,23 @@ pub fn print_intcode(x: usize, y: usize) -> usize {
             _ => println!("Something went wrong."),
         }
         counter = counter + 4;
-    } 
+    }
     return answer;
 }
 
 pub fn find(z: usize) -> (usize, usize) {
-  let mut x = 0;
-  let mut y = 0;
-  for i in 0..100 {
-      x = i;
-      for j in 0..100 {
-          y = j;
-          let test = print_intcode(x, y);
-          if test == z {
-              println!("z is {}, x is {}, y is {} and f(x,y) is {}", z, x, y, test);
-              return (x, y); 
-          }
-      }      
-  }
-  return (x, y); 
+    let mut x = 0;
+    let mut y = 0;
+    for i in 0..100 {
+        x = i;
+        for j in 0..100 {
+            y = j;
+            let test = print_intcode(x, y);
+            if test == z {
+                println!("z is {}, x is {}, y is {} and f(x,y) is {}", z, x, y, test);
+                return (x, y);
+            }
+        }
+    }
+    return (x, y);
 }
