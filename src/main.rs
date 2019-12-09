@@ -1,6 +1,7 @@
 mod day1;
 mod day2;
 mod day2_paul;
+mod day3_paul;
 
 fn main() -> Result<(), std::io::Error> {
     println!("Hello, Advent of Code 2019!");
@@ -20,6 +21,10 @@ fn main() -> Result<(), std::io::Error> {
     println!("Day 2 - Paul");
     let (noun, verb) = day2_paul::find_noun_verb(19690720);
     println!("100 * noun + verb = {}", 100 * noun + verb);
+
+    println!("Day 3 - Paul");
+
+    
 
     Ok(())
 }
