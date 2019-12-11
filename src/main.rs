@@ -24,7 +24,5 @@ fn main() -> Result<(), std::io::Error> {
 
     println!("Day 3 - Paul");
 
-    
-
     Ok(())
 }

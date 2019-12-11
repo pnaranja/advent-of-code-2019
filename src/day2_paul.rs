@@ -14,7 +14,7 @@ use std::io::{BufReader, Read};
 pub fn find_noun_verb(desired_intcode: i32) -> (i32, i32) {
     let (noun, _num): (i32, i32) = (1..100)
         .map(|n| (n, process_intcode(n, 0)))
-        .filter(|&(s, y)| y <= desired_intcode)
+        .filter(|&(_, y)| y <= desired_intcode)
         .last()
         .unwrap();
 
